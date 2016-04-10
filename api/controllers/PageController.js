@@ -752,7 +752,7 @@ module.exports = {
   tutorialDetail: function(req, res) {
 
     // Fake tutorials detail dictionary 
-    var tutorial = {
+    var foundTutorial = {
       id: 1,
       title: 'The best of Douglas Crockford on JavaScript.',
       description: 'Understanding JavasScript the good parts.',
@@ -817,8 +817,8 @@ module.exports = {
     if (!req.session.userId) {
       return res.view('tutorials-detail', {
         me: null,
-        stars: tutorial.stars,
-        tutorial: tutorial
+        stars: foundTutorial.stars,
+        tutorial: foundTutorial
       });
     }
 
@@ -841,14 +841,14 @@ module.exports = {
         admin: user.admin
       };
 
-      if (user.username === tutorial.owner) {
+      if (user.username === foundTutorial.owner) {
         me.isMe = true;
 
         return res.view('tutorials-detail', {
           me: me,
           showAddTutorialButton: true,
-          stars: tutorial.stars,
-          tutorial: tutorial
+          stars: foundTutorial.stars,
+          tutorial: foundTutorial
         });
 
       } else {
@@ -859,8 +859,8 @@ module.exports = {
             admin: user.admin
           },
           showAddTutorialButton: true,
-          stars: tutorial.stars,
-          tutorial: tutorial
+          stars: foundTutorial.stars,
+          tutorial: foundTutorial
         });
       }
     });
